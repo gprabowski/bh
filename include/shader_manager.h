@@ -6,7 +6,12 @@
 
 #include <glad/glad.h>
 
-enum class shader_t { DEFAULT_SHADER, CUBE_SHADER };
+enum class shader_t {
+  DEFAULT_SHADER,
+  CUBE_SHADER,
+  WATER_SHADER,
+  WATER_GENERATION_SHADER
+};
 
 struct shader {
   GLuint idx{0u};
