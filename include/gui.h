@@ -21,6 +21,6 @@ void cleanup_gui();
 
 void render_performance_window();
 void render_general_settings();
-void render_scene_gui(puma::scene &s);
+void render_scene_gui(kaczka::scene &s);
 
 } // namespace gui

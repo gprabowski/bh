@@ -16,8 +16,8 @@ private:
 };
 
 // log macros
-#define GK2_PUMA_TRACE(...) ::log::get_logger()->trace(__VA_ARGS__)
-#define GK2_PUMA_INFO(...) ::log::get_logger()->info(__VA_ARGS__)
-#define GK2_PUMA_WARN(...) ::log::get_logger()->warn(__VA_ARGS__)
-#define GK2_PUMA_ERROR(...) ::log::get_logger()->error(__VA_ARGS__)
-#define GK2_PUMA_CRITICAL(...) ::log::get_logger()->critical(__VA_ARGS__)
+#define GK2_KACZKA_TRACE(...) ::log::get_logger()->trace(__VA_ARGS__)
+#define GK2_KACZKA_INFO(...) ::log::get_logger()->info(__VA_ARGS__)
+#define GK2_KACZKA_WARN(...) ::log::get_logger()->warn(__VA_ARGS__)
+#define GK2_KACZKA_ERROR(...) ::log::get_logger()->error(__VA_ARGS__)
+#define GK2_KACZKA_CRITICAL(...) ::log::get_logger()->critical(__VA_ARGS__)

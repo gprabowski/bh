@@ -81,21 +81,12 @@ void refresh_view(const glm::mat4 &view) {
   glBindBuffer(GL_UNIFORM_BUFFER, sm.common_ubo);
 }
 
-void per_frame_update(puma::scene &s) {
+void per_frame_update(kaczka::scene &s) {
   static auto last_tick = glfwGetTime();
   auto current_tick = glfwGetTime();
   auto delta = last_tick - current_tick;
   last_tick = current_tick;
-
-  if (s.animation) {
-    s.m.move(delta);
-    vector3 cp(s.m.current_point.x, s.m.current_point.y, s.m.current_point.z);
-    vector3 cn(s.m.current_normal.x, s.m.current_normal.y,
-               s.m.current_normal.z);
-    utils::inverse_kinematics(cp, cn, s.r.angles[0], s.r.angles[1],
-                              s.r.angles[2], s.r.angles[3], s.r.angles[4]);
-  }
-  s.r.recalculate_transformations();
+  delta = delta + 0.f;
 }
 
 } // namespace update

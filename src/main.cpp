@@ -7,7 +7,7 @@
 #include <log.h>
 #include <scene.h>
 
-void main_loop(puma::scene &s) {
+void main_loop(kaczka::scene &s) {
   static uint64_t begin_time = glfwGetTimerValue();
 
   auto w = glfwGetCurrentContext();
@@ -24,7 +24,7 @@ void main_loop(puma::scene &s) {
 int main() {
   log::init();
   auto glfw_win = init::init_all("tinyCAD");
-  puma::scene s;
+  kaczka::scene s;
   main_loop(s);
 
   init::cleanup();

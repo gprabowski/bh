@@ -6,8 +6,8 @@
 #include <scene.h>
 
 namespace render {
-void begin_frame(uint64_t &b, puma::scene &s);
+void begin_frame(uint64_t &b, kaczka::scene &s);
 void end_frame(GLFWwindow *w, uint64_t &begin_time);
-void render_window_gui(puma::scene &s);
-void render_viewport(puma::scene &s);
+void render_window_gui(kaczka::scene &s);
+void render_viewport(kaczka::scene &s);
 } // namespace render

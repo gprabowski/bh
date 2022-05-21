@@ -19,12 +19,12 @@ static void framebuffer_size_callback(GLFWwindow *window, int width,
 }
 
 void glfw_window_destroyer(GLFWwindow *w) {
-  GK2_PUMA_INFO("Destroying GLFW window");
+  GK2_KACZKA_INFO("Destroying GLFW window");
   glfwDestroyWindow(w);
 }
 
 static void glfw_error_callback(int error, const char *description) {
-  GK2_PUMA_ERROR("{0}: {1}", error, description);
+  GK2_KACZKA_ERROR("{0}: {1}", error, description);
 }
 
 void teardown() { glfwTerminate(); }
@@ -32,7 +32,7 @@ void teardown() { glfwTerminate(); }
 void glfw_die(const char *message) {
   const char *err;
   glfwGetError(&err);
-  GK2_PUMA_CRITICAL("{0} : {1} ", message, err);
+  GK2_KACZKA_CRITICAL("{0} : {1} ", message, err);
   exit(-1);
 }
 
@@ -47,9 +47,9 @@ static void APIENTRY openglCallbackFunction(GLenum source, GLenum type,
   (void)severity;
   (void)length;
   (void)userParam;
-  GK2_PUMA_ERROR("{0}", message);
+  GK2_KACZKA_ERROR("{0}", message);
   if (severity == GL_DEBUG_SEVERITY_HIGH) {
-    GK2_PUMA_CRITICAL("Aborting...");
+    GK2_KACZKA_CRITICAL("Aborting...");
     abort();
   }
 }
@@ -80,7 +80,7 @@ void glfw_setup() {
     glfw_die("Couldn't initialize GLFW");
   }
 
-  GK2_PUMA_INFO("GLFW Successfully initialized");
+  GK2_KACZKA_INFO("GLFW Successfully initialized");
 }
 
 std::shared_ptr<GLFWwindow> glfw_get_window(const int w, const int h,
@@ -104,15 +104,17 @@ void glad_setup() {
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     glfw_die("[ERROR] Couldn't initialize GLAD");
   } else {
-    GK2_PUMA_INFO("GLAD Successfully initialized");
+    GK2_KACZKA_INFO("GLAD Successfully initialized");
   }
 }
 
 void ogl_print_info() {
-  GK2_PUMA_INFO("OpenGL loaded");
-  //GK2_PUMA_INFO("Vendor: {0}", reinterpret_cast<const char *>(glGetString(GL_VENDOR)));
-  //GK2_PUMA_INFO("Renderer: {0}", reinterpret_cast<const char *>(glGetString(GL_RENDERER)));
-  //GK2_PUMA_INFO("Version: {0}", reinterpret_cast<const char *>(glGetString(GL_VERSION)));
+  GK2_KACZKA_INFO("OpenGL loaded");
+  // GK2_KACZKA_INFO("Vendor: {0}", reinterpret_cast<const char
+  // *>(glGetString(GL_VENDOR))); GK2_PUMA_INFO("Renderer: {0}",
+  // reinterpret_cast<const char *>(glGetString(GL_RENDERER)));
+  // GK2_KACZKA_INFO("Version: {0}", reinterpret_cast<const char
+  // *>(glGetString(GL_VERSION)));
 }
 
 void ogl_setup(std::shared_ptr<GLFWwindow> w) {
@@ -162,10 +164,7 @@ std::shared_ptr<GLFWwindow> init_all(const char *caption) {
   auto &sm = shader_manager::get_manager();
   // read in all shaders
   sm.add(shader_t::DEFAULT_SHADER, "resources/general");
-  sm.add(shader_t::SILHOUETTE_SHADER, "resources/silhouette");
-  sm.add(shader_t::NULL_SHADER, "resources/null");
-  sm.add(shader_t::SHADOW_VOLUME_SHADER, "resources/shadow");
-  sm.add(shader_t::PARTICLE_SHADER, "resources/particle");
+  sm.add(shader_t::CUBE_SHADER, "resources/cube");
 
   gui::setup_gui(w);
 

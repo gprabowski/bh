@@ -8,5 +8,5 @@
 #include <scene.h>
 
 namespace handlers {
-void process_input(puma::scene &s);
+void process_input(kaczka::scene &s);
 }

@@ -6,7 +6,7 @@
 
 #include <glad/glad.h>
 
-enum class shader_t { DEFAULT_SHADER, SILHOUETTE_SHADER, NULL_SHADER, SHADOW_VOLUME_SHADER, PARTICLE_SHADER };
+enum class shader_t { DEFAULT_SHADER, CUBE_SHADER };
 
 struct shader {
   GLuint idx{0u};
@@ -32,8 +32,7 @@ struct shader_manager {
 private:
   shader_manager();
 
-  std::string
-  read_shader_file(const std::filesystem::path shader_file);
+  std::string read_shader_file(const std::filesystem::path shader_file);
 
   std::map<std::string, shader> cache;
 };

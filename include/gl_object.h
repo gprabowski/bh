@@ -18,7 +18,7 @@ struct gl_object {
   glm::vec4 color{1.0f, 1.0f, 1.0f, 1.0f};
   glm::vec3 intensity{0.0f, 1.0f, 1.0f};
 
-  void reset_api_elements(puma::mesh &m);
+  void reset_api_elements(kaczka::mesh &m);
 
   gl_object &operator=(const gl_object &r) = delete;
   gl_object &operator=(const gl_object &&r) = delete;

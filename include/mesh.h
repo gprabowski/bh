@@ -3,12 +3,12 @@
 #include <filesystem>
 #include <vector>
 
+#include <cassert>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <map>
-#include <cassert>
 
-namespace puma {
+namespace kaczka {
 
 struct vertex_t {
   glm::vec3 pos;
@@ -25,13 +25,13 @@ struct edge_t {
       v2 = _v2;
     } else {
       v1 = _v2;
-      v2 = _v1;      
+      v2 = _v1;
     }
   }
 };
 
 struct neighbors_t {
-	GLuint t1, t2;
+  GLuint t1, t2;
 
   GLuint other(GLuint t) {
     assert(t == t1 || t == t2);
@@ -39,17 +39,13 @@ struct neighbors_t {
   }
 };
 
-struct compare_edges
-{
-  bool operator()(const edge_t& e1, const edge_t& e2) const
-  {
+struct compare_edges {
+  bool operator()(const edge_t &e1, const edge_t &e2) const {
     if (e1.v1 < e2.v1) {
       return true;
-    }
-    else if (e1.v1 == e2.v1) {
+    } else if (e1.v1 == e2.v1) {
       return (e1.v2 < e2.v2);
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -67,7 +63,7 @@ struct mesh {
   std::vector<GLuint> vertex_index;
   std::map<edge_t, neighbors_t, compare_edges> edges;
 
-  GLuint opposite_vertex(const edge_t& edge, const triangle_t& triangle) const {
+  GLuint opposite_vertex(const edge_t &edge, const triangle_t &triangle) const {
     for (GLuint i = 0; i < 3; i++) {
       GLuint index = vertex_index[triangle.indices[i]];
       if (index != edge.v1 && index != edge.v2) {
@@ -79,4 +75,4 @@ struct mesh {
   }
 };
 
-} // namespace puma
+} // namespace kaczka

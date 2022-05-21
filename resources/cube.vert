@@ -2,7 +2,6 @@
 
 layout(location = 0) in vec3 pos;
 layout(location = 1) in vec3 norm;
-layout(location = 2) in vec4 col;
 
 layout (std140) uniform common_block {
     mat4 proj;
@@ -14,9 +13,11 @@ layout (std140) uniform common_block {
 
 uniform mat4 model;
 
-out float life;
+out vec3 normal;
+out vec3 frag_pos;
 
 void main() {
-    gl_Position = model * vec4(pos, 1.0);
-    life = norm.x;
+    gl_Position = proj * view * model * vec4(pos, 1.0);
+    frag_pos = vec3(model * vec4(pos, 1.0));
+    normal = transpose(inverse(mat3(model))) * norm;
 }

@@ -8,5 +8,5 @@ namespace update {
 void setup_globals();
 void refresh_ubos();
 void refresh_view(const glm::mat4 &view);
-void per_frame_update(puma::scene &s);
+void per_frame_update(kaczka::scene &s);
 } // namespace update
