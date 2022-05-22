@@ -30,9 +30,11 @@ void kaczka::scene::draw() {
 
   glDepthMask(GL_TRUE);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-  w.render();
   c.render();
+  w.render(c.cube_map);
 }
 
 void load_from_file(const std::filesystem::path mesh,
                     const std::filesystem::path texture) {}
+
+kaczka::scene::scene() {}

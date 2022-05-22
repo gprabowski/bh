@@ -8,7 +8,7 @@
 #include <transformation.h>
 
 struct water {
-  GLuint height_textures[2];
+  GLuint height_textures[3];
   GLuint normal_texture;
   GLuint water_depth;
   GLuint water_framebuffer;
@@ -22,5 +22,5 @@ struct water {
   ~water();
   void drop_droplet();
   void regenerate();
-  void render();
+  void render(GLuint cubemap);
 };

@@ -13,11 +13,14 @@ layout (std140) uniform common_block {
 };
 
 uniform mat4 model;
+uniform float water_level;
 
 out vec4 color;
 out vec3 fragtex;
+out vec3 world_pos;
 
 void main() {
-    gl_Position = proj * view * model * vec4(pos, 1.0);
+    world_pos = vec3(model* vec4(pos, 1.0));
+    gl_Position = proj * view * vec4(world_pos, 1.0);
     fragtex = tex;
 }

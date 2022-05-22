@@ -24,6 +24,8 @@ struct scene {
   void draw();
   void after();
 
+  scene();
+
   // various render passes
 private:
 };
