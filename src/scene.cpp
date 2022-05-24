@@ -31,6 +31,7 @@ void kaczka::scene::draw() {
   glDepthMask(GL_TRUE);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
   c.render();
+  d.render();
   w.render(c.cube_map);
 }
 

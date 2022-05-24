@@ -10,7 +10,8 @@ enum class shader_t {
   DEFAULT_SHADER,
   CUBE_SHADER,
   WATER_SHADER,
-  WATER_GENERATION_SHADER
+  WATER_GENERATION_SHADER,
+  DUCK_SHADER
 };
 
 struct shader {

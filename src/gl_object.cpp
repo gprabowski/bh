@@ -16,12 +16,16 @@ void gl_object::reset_api_elements(kaczka::mesh &m) {
 
   glEnableVertexArrayAttrib(vao, 0);
   glEnableVertexArrayAttrib(vao, 1);
+  glEnableVertexArrayAttrib(vao, 2);
 
   glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, GL_FALSE,
                             offsetof(kaczka::vertex_t, pos));
   glVertexArrayAttribFormat(vao, 1, 3, GL_FLOAT, GL_FALSE,
                             offsetof(kaczka::vertex_t, norm));
+  glVertexArrayAttribFormat(vao, 2, 2, GL_FLOAT, GL_FALSE,
+                            offsetof(kaczka::vertex_t, tex));
 
   glVertexArrayAttribBinding(vao, 0, 0);
   glVertexArrayAttribBinding(vao, 1, 0);
+  glVertexArrayAttribBinding(vao, 2, 0);
 }

@@ -167,6 +167,7 @@ std::shared_ptr<GLFWwindow> init_all(const char *caption) {
   sm.add(shader_t::CUBE_SHADER, "resources/cube");
   sm.add(shader_t::WATER_SHADER, "resources/water");
   sm.add(shader_t::WATER_GENERATION_SHADER, "resources/watergen");
+  sm.add(shader_t::DUCK_SHADER, "resources/duck");
 
   gui::setup_gui(w);
 
