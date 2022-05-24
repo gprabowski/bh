@@ -85,7 +85,9 @@ void per_frame_update(kaczka::scene &s) {
   static auto last_tick = glfwGetTime();
   auto current_tick = glfwGetTime();
   auto delta = last_tick - current_tick;
-  s.d.update();
+  if (s.d.animation) {
+    s.d.update();
+  }
   s.w.regenerate({s.d.t.translation.x, -s.d.t.translation.z});
   last_tick = current_tick;
   delta = delta + 0.f;

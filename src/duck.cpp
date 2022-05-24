@@ -196,6 +196,8 @@ void duck::render() {
   glBindTextureUnit(2, ducktex);
 
   glUniform1i(glGetUniformLocation(g.program, "duck_map"), 2);
+  auto sd = glm::normalize(strain_dir);
+  glUniform3f(glGetUniformLocation(g.program, "strain_dir"), sd.x, sd.y, sd.z);
 
   auto translation = glm::vec4(deboor(bspline.control_points, current_t), 1.0);
   auto tangent =

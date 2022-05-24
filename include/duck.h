@@ -15,6 +15,8 @@ struct duck {
   std::mt19937 mt{r()};
   std::uniform_real_distribution<float> dist{0.0, 1.0};
   float current_t = 0.0f;
+  bool animation{true};
+  glm::vec4 strain_dir{sqrtf(2.f), 0, -sqrtf(2.f), 1.0f};
 
   gl_object g;
   kaczka::mesh m;

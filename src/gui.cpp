@@ -221,6 +221,16 @@ void render_scene_gui(kaczka::scene &s) {
     ImGui::TreePop();
   }
 
+  ImGui::Text("%s", "Duck");
+  desc = ("Show more##duck");
+  ImGui::SameLine(160.f);
+  if (ImGui::TreeNode(desc.c_str())) {
+    ImGui::SliderFloat3("Strain Dir", glm::value_ptr(s.d.strain_dir), -1.f,
+                        1.f);
+    ImGui::Checkbox("Animation", &s.d.animation);
+    ImGui::TreePop();
+  }
+
   ImGui::End();
 }
 
