@@ -9,7 +9,7 @@
 #include <utils.h>
 
 void water::drop_droplet() {}
-void water::regenerate() {
+void water::regenerate(const glm::vec2 &duck) {
   static auto last_time = glfwGetTime();
   static std::random_device r{};
   static std::mt19937 mt{r()};
@@ -50,6 +50,10 @@ void water::regenerate() {
     glUniform2f(glGetUniformLocation(regeneration_program.idx, "discordance"),
                 disc.x, disc.y);
   }
+
+  glUniform2f(glGetUniformLocation(regeneration_program.idx, "duck"), duck.x,
+              duck.y);
+
   glUniform1f(glGetUniformLocation(regeneration_program.idx, "delta_time"), dt);
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   glDrawElements(GL_TRIANGLES, m.elements.size(), GL_UNSIGNED_INT, NULL);

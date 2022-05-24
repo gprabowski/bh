@@ -31,6 +31,13 @@ void get_model_uniform(transformation &t, glm::mat4 &out) {
   out = model;
 }
 
+void set_model_uniform(glm::mat4 &t) {
+  GLint program;
+  glGetIntegerv(GL_CURRENT_PROGRAM, &program);
+  glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE,
+                     glm::value_ptr(t));
+}
+
 void set_model_uniform(transformation &t) {
   GLint program;
   glGetIntegerv(GL_CURRENT_PROGRAM, &program);

@@ -21,6 +21,6 @@ struct water {
   water();
   ~water();
   void drop_droplet();
-  void regenerate();
+  void regenerate(const glm::vec2 &duck);
   void render(GLuint cubemap);
 };

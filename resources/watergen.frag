@@ -18,6 +18,7 @@ uniform sampler2D height_texture_before_last;
 
 uniform float delta_time;
 uniform vec2 discordance;
+uniform vec2 duck;
 
 const float N = 256;
 const float h = 2.0 / (N - 1);
@@ -45,7 +46,7 @@ void main() {
 
             0.0, 0.0, 1.0);
 
-    if(length(frag_pos.xy - discordance) < (2 * dt)) _height.x += 0.5;
+    if(length(frag_pos.xy - duck) < (2 * dt) || length(frag_pos.xy - discordance) < (2 * dt)) _height.x += 0.5;
     height = _height;
 
     // normal
