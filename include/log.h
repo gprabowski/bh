@@ -16,8 +16,8 @@ private:
 };
 
 // log macros
-#define GK2_KACZKA_TRACE(...) ::log::get_logger()->trace(__VA_ARGS__)
-#define GK2_KACZKA_INFO(...) ::log::get_logger()->info(__VA_ARGS__)
-#define GK2_KACZKA_WARN(...) ::log::get_logger()->warn(__VA_ARGS__)
-#define GK2_KACZKA_ERROR(...) ::log::get_logger()->error(__VA_ARGS__)
-#define GK2_KACZKA_CRITICAL(...) ::log::get_logger()->critical(__VA_ARGS__)
+#define GK2_BLACKHOLE_TRACE(...) ::log::get_logger()->trace(__VA_ARGS__)
+#define GK2_BLACKHOLE_INFO(...) ::log::get_logger()->info(__VA_ARGS__)
+#define GK2_BLACKHOLE_WARN(...) ::log::get_logger()->warn(__VA_ARGS__)
+#define GK2_BLACKHOLE_ERROR(...) ::log::get_logger()->error(__VA_ARGS__)
+#define GK2_BLACKHOLE_CRITICAL(...) ::log::get_logger()->critical(__VA_ARGS__)

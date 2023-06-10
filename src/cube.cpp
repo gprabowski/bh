@@ -6,6 +6,8 @@
 #include <shader_manager.h>
 #include <utils.h>
 
+#include <iostream>
+
 struct image_data {
   unsigned char *data;
   int width, height, nr_channels;
@@ -14,9 +16,9 @@ struct image_data {
 cube::cube() {
   // initialize cube map texture
   std::array<std::string, 6> textures_faces{
-      "assets/skybox/right.jpg", "assets/skybox/left.jpg",
-      "assets/skybox/top.jpg",   "assets/skybox/bottom.jpg",
-      "assets/skybox/front.jpg", "assets/skybox/back.jpg",
+      "assets/skybox/right.png", "assets/skybox/left.png",
+      "assets/skybox/top.png",   "assets/skybox/bottom.png",
+      "assets/skybox/front.png", "assets/skybox/back.png",
   };
 
   glCreateTextures(GL_TEXTURE_CUBE_MAP, 1, &cube_map);
@@ -24,12 +26,14 @@ cube::cube() {
 
   for (std::size_t i = 0; i < data.size(); ++i) {
     data[i].data = stbi_load(textures_faces[i].c_str(), &data[i].width,
-                             &data[i].height, &data[i].nr_channels, 0);
+                             &data[i].height, &data[i].nr_channels, 3);
   }
 
-  glTextureStorage2D(cube_map, 1, GL_RGBA8, data[0].width, data[0].height);
+  glTextureStorage2D(cube_map, 1, GL_RGB8, data[0].width, data[0].height);
 
   for (std::size_t i = 0; i < textures_faces.size(); ++i) {
+    std::cout << " size: " << data[i].width << " " << data[i].height
+              << std::endl;
     glTextureSubImage3D(cube_map, 0, 0, 0, i, data[i].width, data[i].height, 1,
                         GL_RGB, GL_UNSIGNED_BYTE, data[i].data);
   }
@@ -48,48 +52,17 @@ cube::cube() {
   static auto &sm = shader_manager::get_manager();
   // generate vertices
   m.vertices = {
-      // east wall
-      {{1.0f, -1.0f, -1.0f}, {-1.0f, 0.0f, 0.0f}},
-      {{1.0f, 1.0f, -1.0f}, {-1.0f, 0.0f, 0.0f}},
-      {{1.0f, 1.0f, 1.0f}, {-1.0f, 0.0f, 0.0f}},
-      {{1.0f, -1.0f, 1.0f}, {-1.0f, 0.0f, 0.0f}},
-
-      // west wall
-      {{-1.0f, -1.0f, -1.0f}, {1.0f, 0.0f, 0.0f}},
-      {{-1.0f, 1.0f, -1.0f}, {1.0f, 0.0f, 0.0f}},
-      {{-1.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 0.0f}},
-      {{-1.0f, -1.0f, 1.0f}, {1.0f, 0.0f, 0.0f}},
-
-      // north wall
-      {{-1.0f, -1.0f, 1.0f}, {0.0f, 0.0f, -1.0f}},
-      {{-1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, -1.0f}},
-      {{1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, -1.0f}},
-      {{1.0f, -1.0f, 1.0f}, {0.0f, 0.0f, -1.0f}},
 
       // south wall
-      {{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f, 1.0f}},
-      {{-1.0f, 1.0f, -1.0f}, {0.0f, 0.0f, 1.0f}},
-      {{1.0f, 1.0f, -1.0f}, {0.0f, 0.0f, 1.0f}},
-      {{1.0f, -1.0f, -1.0f}, {0.0f, 0.0f, 1.0f}},
+      {{-1.0f, -1.0f, 0.0f}, {0.0f, 0.0f, 1.0f}},
+      {{-1.0f, 1.0f, 0.0f}, {0.0f, 0.0f, 1.0f}},
+      {{1.0f, 1.0f, 0.0f}, {0.0f, 0.0f, 1.0f}},
+      {{1.0f, -1.0f, 0.0f}, {0.0f, 0.0f, 1.0f}},
 
-      // floor
-      {{-1.0f, -1.0f, 1.0f}, {0.0f, 1.0f, 0.0f}},
-      {{-1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}},
-      {{1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}},
-      {{1.0f, -1.0f, 1.0f}, {0.0f, 1.0f, 0.0f}},
-
-      // ceiling
-      {{-1.0f, 1.0f, 1.0f}, {0.0f, -1.0f, 0.0f}},
-      {{-1.0f, 1.0f, -1.0f}, {0.0f, -1.0f, 0.0f}},
-      {{1.0f, 1.0f, -1.0f}, {0.0f, -1.0f, 0.0f}},
-      {{1.0f, 1.0f, 1.0f}, {0.0f, -1.0f, 0.0f}},
   };
 
   // generate indices
-  m.elements = {
-      0,  2,  1,  2,  0,  3,  4,  5,  6,  6,  7,  4,  8,  9,  10, 10, 11, 8,
-      12, 14, 13, 15, 14, 12, 16, 18, 17, 18, 16, 19, 20, 21, 22, 22, 23, 20,
-  };
+  m.elements = {0, 2, 1, 3, 2, 0};
 
   g.program = sm.programs[shader_t::CUBE_SHADER].idx;
   g.reset_api_elements(m);

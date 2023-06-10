@@ -241,27 +241,14 @@ void render_transformation_gui(transformation &t) {
   }
 }
 
-void render_scene_gui(kaczka::scene &s) {
-  ImGui::Begin("Scene Settings");
+void render_scene_gui(blackhole::scene &s) {
+  ImGui::Begin("Settings");
 
-  ImGui::Text("%s", "Light");
-  std::string desc = ("Show more##light");
-  ImGui::SameLine(160.f);
-  if (ImGui::TreeNode(desc.c_str())) {
-    ImGui::SliderFloat4("Position", glm::value_ptr(frame_state::light_pos),
-                        -10.f, 10.f);
-    ImGui::ColorEdit4("Color", glm::value_ptr(frame_state::light_color));
-    ImGui::TreePop();
+  if (ImGui::SliderFloat("Black Hole Position", &frame_state::bh_pos[2], 1e3f,
+                         1e10f)) {
   }
-
-  ImGui::Text("%s", "Duck");
-  desc = ("Show more##duck");
-  ImGui::SameLine(160.f);
-  if (ImGui::TreeNode(desc.c_str())) {
-    ImGui::SliderFloat3("Strain Dir", glm::value_ptr(s.d.strain_dir), -1.f,
-                        1.f);
-    ImGui::Checkbox("Animation", &s.d.animation);
-    ImGui::TreePop();
+  if (ImGui::SliderFloat("Black Hole Mass", &frame_state::bh_mass, 1e3f,
+                         2e30f)) {
   }
 
   ImGui::End();

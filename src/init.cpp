@@ -19,12 +19,12 @@ static void framebuffer_size_callback(GLFWwindow *window, int width,
 }
 
 void glfw_window_destroyer(GLFWwindow *w) {
-  GK2_KACZKA_INFO("Destroying GLFW window");
+  GK2_BLACKHOLE_INFO("Destroying GLFW window");
   glfwDestroyWindow(w);
 }
 
 static void glfw_error_callback(int error, const char *description) {
-  GK2_KACZKA_ERROR("{0}: {1}", error, description);
+  GK2_BLACKHOLE_ERROR("{0}: {1}", error, description);
 }
 
 void teardown() { glfwTerminate(); }
@@ -32,7 +32,7 @@ void teardown() { glfwTerminate(); }
 void glfw_die(const char *message) {
   const char *err;
   glfwGetError(&err);
-  GK2_KACZKA_CRITICAL("{0} : {1} ", message, err);
+  GK2_BLACKHOLE_CRITICAL("{0} : {1} ", message, err);
   exit(-1);
 }
 
@@ -47,9 +47,9 @@ static void APIENTRY openglCallbackFunction(GLenum source, GLenum type,
   (void)severity;
   (void)length;
   (void)userParam;
-  GK2_KACZKA_ERROR("{0}", message);
+  GK2_BLACKHOLE_ERROR("{0}", message);
   if (severity == GL_DEBUG_SEVERITY_HIGH) {
-    GK2_KACZKA_CRITICAL("Aborting...");
+    GK2_BLACKHOLE_CRITICAL("Aborting...");
     abort();
   }
 }
@@ -80,7 +80,7 @@ void glfw_setup() {
     glfw_die("Couldn't initialize GLFW");
   }
 
-  GK2_KACZKA_INFO("GLFW Successfully initialized");
+  GK2_BLACKHOLE_INFO("GLFW Successfully initialized");
 }
 
 std::shared_ptr<GLFWwindow> glfw_get_window(const int w, const int h,
@@ -104,16 +104,16 @@ void glad_setup() {
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     glfw_die("[ERROR] Couldn't initialize GLAD");
   } else {
-    GK2_KACZKA_INFO("GLAD Successfully initialized");
+    GK2_BLACKHOLE_INFO("GLAD Successfully initialized");
   }
 }
 
 void ogl_print_info() {
-  GK2_KACZKA_INFO("OpenGL loaded");
-  // GK2_KACZKA_INFO("Vendor: {0}", reinterpret_cast<const char
+  GK2_BLACKHOLE_INFO("OpenGL loaded");
+  // GK2_BLACKHOLE_INFO("Vendor: {0}", reinterpret_cast<const char
   // *>(glGetString(GL_VENDOR))); GK2_PUMA_INFO("Renderer: {0}",
   // reinterpret_cast<const char *>(glGetString(GL_RENDERER)));
-  // GK2_KACZKA_INFO("Version: {0}", reinterpret_cast<const char
+  // GK2_BLACKHOLE_INFO("Version: {0}", reinterpret_cast<const char
   // *>(glGetString(GL_VERSION)));
 }
 
@@ -165,9 +165,6 @@ std::shared_ptr<GLFWwindow> init_all(const char *caption) {
   // read in all shaders
   sm.add(shader_t::DEFAULT_SHADER, "resources/general");
   sm.add(shader_t::CUBE_SHADER, "resources/cube");
-  sm.add(shader_t::WATER_SHADER, "resources/water");
-  sm.add(shader_t::WATER_GENERATION_SHADER, "resources/watergen");
-  sm.add(shader_t::DUCK_SHADER, "resources/duck");
 
   gui::setup_gui(w);
 

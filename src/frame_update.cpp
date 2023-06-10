@@ -53,11 +53,9 @@ void refresh_ubos() {
          sizeof(float) * 16);
   memcpy(&common_ubo_ptr[16], glm::value_ptr(frame_state::view),
          sizeof(float) * 16);
-  memcpy(&common_ubo_ptr[32], glm::value_ptr(frame_state::light_pos),
-         sizeof(float) * 4);
-  memcpy(&common_ubo_ptr[36], glm::value_ptr(frame_state::light_color),
-         sizeof(float) * 4);
-  memcpy(&common_ubo_ptr[40], glm::value_ptr(is.cam_pos), sizeof(float) * 4);
+  glm::vec4 bh_data{frame_state::bh_pos.x, frame_state::bh_pos.y,
+                    frame_state::bh_pos.z, frame_state::bh_mass};
+  memcpy(&common_ubo_ptr[32], glm::value_ptr(bh_data), sizeof(float) * 4);
   glUnmapNamedBuffer(sm.common_ubo);
   glBindBuffer(GL_UNIFORM_BUFFER, sm.common_ubo);
 }
@@ -71,24 +69,21 @@ void refresh_view(const glm::mat4 &view) {
       GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
   memcpy(&common_ubo_ptr[0], glm::value_ptr(frame_state::proj),
          sizeof(float) * 16);
-  memcpy(&common_ubo_ptr[16], glm::value_ptr(view), sizeof(float) * 16);
-  memcpy(&common_ubo_ptr[32], glm::value_ptr(frame_state::light_pos),
-         sizeof(float) * 4);
-  memcpy(&common_ubo_ptr[36], glm::value_ptr(frame_state::light_color),
-         sizeof(float) * 4);
-  memcpy(&common_ubo_ptr[40], glm::value_ptr(is.cam_pos), sizeof(float) * 4);
+  memcpy(&common_ubo_ptr[16], glm::value_ptr(frame_state::view),
+         sizeof(float) * 16);
+  glm::vec4 bh_data{frame_state::bh_pos.x, frame_state::bh_pos.y,
+                    frame_state::bh_pos.z, frame_state::bh_mass};
+  memcpy(&common_ubo_ptr[32], glm::value_ptr(bh_data), sizeof(float) * 4);
+
   glUnmapNamedBuffer(sm.common_ubo);
   glBindBuffer(GL_UNIFORM_BUFFER, sm.common_ubo);
 }
 
-void per_frame_update(kaczka::scene &s) {
+void per_frame_update(blackhole::scene &s) {
   static auto last_tick = glfwGetTime();
   auto current_tick = glfwGetTime();
   auto delta = last_tick - current_tick;
-  if (s.d.animation) {
-    s.d.update();
-  }
-  s.w.regenerate({s.d.t.translation.x, -s.d.t.translation.z});
+
   last_tick = current_tick;
   delta = delta + 0.f;
 }

@@ -17,6 +17,9 @@ struct frame_state {
   static glm::vec4 light_pos;
   static glm::vec4 light_color;
 
+  static glm::vec3 bh_pos;
+  static float bh_mass;
+
   static int window_w;
   static int window_h;
 

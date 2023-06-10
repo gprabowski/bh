@@ -43,9 +43,9 @@ message("GLFW EXAMPLES BUILD TURNED OFF")
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 message("GLFW WAYLAND BUILD TURNED ON")
-set(GLFW_USE_WAYLAND ON CACHE BOOL "Use Wayland for window creation" FORCE)
+set(GLFW_USE_WAYLAND OFF CACHE BOOL "Use Wayland for window creation" FORCE)
 message("GLFW X11 BUILD TURNED ON")
-set(GLFW_BUILD_X11 OFF CACHE BOOL "Turn off X11 support" FORCE)
+set(GLFW_BUILD_X11 ON CACHE BOOL "Turn off X11 support" FORCE)
 
 message(" ADDING GLFW")
 add_subdirectory(glfw)

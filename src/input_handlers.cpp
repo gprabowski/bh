@@ -8,7 +8,7 @@ namespace handlers {
 
 const float angle_delta = 0.02f;
 
-void handle_keyboard(kaczka::scene &s) {
+void handle_keyboard(blackhole::scene &s) {
   static float delta_time = 0.0f;
   static float last_frame = 0.0f;
 
@@ -76,7 +76,7 @@ void handle_mouse() {
   }
 }
 
-void process_input(kaczka::scene &s) {
+void process_input(blackhole::scene &s) {
   using fs = frame_state;
   if (!ImGui::IsMouseHoveringRect(fs::content_pos,
                                   {fs::content_pos.x + fs::content_area.x,

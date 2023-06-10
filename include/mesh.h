@@ -8,7 +8,7 @@
 #include <glm/glm.hpp>
 #include <map>
 
-namespace kaczka {
+namespace blackhole {
 
 struct vertex_t {
   glm::vec3 pos;
@@ -21,4 +21,4 @@ struct mesh {
   std::vector<GLuint> elements;
 };
 
-} // namespace kaczka
+} // namespace blackhole

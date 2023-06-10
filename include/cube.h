@@ -8,7 +8,7 @@ struct cube {
   GLuint cube_map;
   gl_object g;
   transformation t;
-  kaczka::mesh m;
+  blackhole::mesh m;
   bool visible{true};
 
   cube();

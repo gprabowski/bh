@@ -13,18 +13,16 @@
 #include <frame_state.h>
 #include <frame_update.h>
 
-void kaczka::scene::draw() {
+void blackhole::scene::draw() {
   update::setup_globals();
   update::refresh_ubos();
 
   glDepthMask(GL_TRUE);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
   c.render();
-  d.render();
-  w.render(c.cube_map);
 }
 
 void load_from_file(const std::filesystem::path mesh,
                     const std::filesystem::path texture) {}
 
-kaczka::scene::scene() {}
+blackhole::scene::scene() {}

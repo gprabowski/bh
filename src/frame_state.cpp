@@ -17,3 +17,6 @@ ImVec2 frame_state::content_pos;
 
 uint64_t frame_state::freq = glfwGetTimerFrequency();
 double frame_state::last_cpu_frame;
+
+glm::vec3 frame_state::bh_pos{0.f, 0.f, 1e10f};
+float frame_state::bh_mass{1e8f};

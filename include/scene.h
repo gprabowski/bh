@@ -8,16 +8,12 @@
 #include <glm/gtx/quaternion.hpp>
 
 #include <cube.h>
-#include <duck.h>
 #include <gl_object.h>
 #include <transformation.h>
-#include <water.h>
 
-namespace kaczka {
+namespace blackhole {
 
 struct scene {
-  duck d;
-  water w;
   cube c;
 
   void before();
@@ -30,4 +26,4 @@ struct scene {
 private:
 };
 
-}; // namespace kaczka
+}; // namespace blackhole

@@ -19,7 +19,7 @@ void clean_render() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void begin_frame(uint64_t &b, kaczka::scene &s) {
+void begin_frame(uint64_t &b, blackhole::scene &s) {
   clean_render();
   b = glfwGetTimerValue();
 
@@ -40,13 +40,13 @@ void end_frame(GLFWwindow *w, uint64_t &begin_time) {
   glfwPollEvents();
 }
 
-void render_window_gui(kaczka::scene &s) {
+void render_window_gui(blackhole::scene &s) {
   gui::render_performance_window();
   gui::render_general_settings();
   gui::render_scene_gui(s);
 }
 
-void render_viewport(kaczka::scene &s) {
+void render_viewport(blackhole::scene &s) {
   // display
   static auto &fb = framebuffer::get();
   static auto &desc = fb.get_desc();
